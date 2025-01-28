@@ -1,10 +1,11 @@
 package com.example.api_retoTecnico.service;
 
+import com.example.api_retoTecnico.exception.CustomException;
 import com.example.api_retoTecnico.model.Character;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-import reactor.core.publisher.Mono;
+
 
 import java.util.List;
 
