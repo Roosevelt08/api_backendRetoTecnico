@@ -2,9 +2,11 @@ package com.example.api_retoTecnico.service;
 
 import com.example.api_retoTecnico.exception.CustomException;
 import com.example.api_retoTecnico.model.Character;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class RickAndMortyService {
                     .map(CharacterListResponse::getResults)
                     .block();
         } catch (WebClientResponseException e) {
-            throw new CustomException("Error al obtener los personajes.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al obtener los personajes.");
         }
     }
 
@@ -37,8 +39,10 @@ public class RickAndMortyService {
                     .retrieve()
                     .bodyToMono(Character.class)
                     .block();
+        } catch (WebClientResponseException.NotFound e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Personaje no encontrado.");
         } catch (WebClientResponseException e) {
-            throw new CustomException("Personaje no encontrado.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al obtener el personaje.");
         }
     }
 
