@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
-
 import java.util.List;
 
 @Service
@@ -27,7 +26,7 @@ public class RickAndMortyService {
                     .map(CharacterListResponse::getResults)
                     .block();
         } catch (WebClientResponseException e) {
-            throw new RuntimeException("Error al obtener personajes: " + e.getMessage());
+            throw new CustomException("Error al obtener los personajes.");
         }
     }
 
