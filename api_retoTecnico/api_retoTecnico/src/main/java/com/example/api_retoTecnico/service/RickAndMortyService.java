@@ -1,6 +1,5 @@
 package com.example.api_retoTecnico.service;
 
-import com.example.api_retoTecnico.exception.CustomException;
 import com.example.api_retoTecnico.model.Character;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
